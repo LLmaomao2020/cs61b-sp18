@@ -21,7 +21,7 @@ public class IntListTest {
     }
 
     @Test
-    public void testdSquareList() {
+    public void testDSquareList() {
         IntList L = IntList.of(1, 2, 3);
         IntList.dSquareList(L);
         assertEquals(IntList.of(1, 4, 9), L);
@@ -58,12 +58,33 @@ public class IntListTest {
     }
 
     @Test
-    public void testCatenate() {
+    public void testDcatenateRecursive() {
         IntList A = IntList.of(1, 2, 3);
         IntList B = IntList.of(4, 5, 6);
         IntList exp = IntList.of(1, 2, 3, 4, 5, 6);
-        assertEquals(exp, IntList.catenate(A, B));
+        assertEquals(exp, IntList.dcatenateRecursive(A, B));
+        assertEquals(IntList.of(1, 2, 3, 4, 5, 6), A);
+    }
+    @Test
+    public void testCatenateIteration() {
+        IntList A = IntList.of(1, 2, 3);
+        IntList B = IntList.of(4, 5, 6);
+        IntList exp = IntList.of(1, 2, 3, 4, 5, 6);
+        IntList L=IntList.catenateIteration(A, B);
+        assertEquals(exp, L);
+        assertEquals(IntList.of(1, 2, 3), A);
+    }
+
+    @Test
+    public void testCatenateRecursive(){
+        IntList A = IntList.of(1, 2, 3);
+        IntList B = IntList.of(4, 5, 6);
+        IntList exp = IntList.of(1, 2, 3, 4, 5, 6);
+        IntList L=IntList.catenateRecursive(A, B);
+        assertEquals(exp, L);
         assertEquals(IntList.of(1, 2, 3), A);
     }
 
 }
+
+
