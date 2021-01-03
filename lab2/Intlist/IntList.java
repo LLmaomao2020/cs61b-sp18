@@ -82,32 +82,101 @@ public class IntList {
 
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
-    }
+        if (A == null) {A=B;return A;};
+        if (B == null) return A;
+        else {
+            IntList p=A;
+            while(p.rest!=null) {
+                p=p.rest;}
 
+                p.rest = B;
+                return A;
+            }
+        }
+
+    public static IntList dcatenateRecursive(IntList A, IntList B) {
+        //TODO:  fill in method
+        if(A==null) {A=B; return A;}
+        if (A.rest == null) A.rest=B;
+        else {
+            A.rest=dcatenateRecursive(A.rest,B);
+        }
+        return A;
+    }
     /**
      * Returns a list consisting of the elements of A followed by the
      * * elements of B.  May NOT modify items of A.  Use 'new'.
      */
-    public static IntList catenate(IntList A, IntList B) {
+    public static IntList catenateIteration(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        if(A==null && B==null) return null;
+        else if (A==null) {
+            IntList p = B;
+
+            IntList L = new IntList(p.first, null);
+            IntList Q = L;
+            while (p.rest != null) {
+                p = p.rest;
+                L.rest = new IntList(p.first, null);
+
+                L = L.rest;
+
+            }
+            return Q;
+        }
+        else if (B==null) {
+            IntList p = A;
+            IntList L = new IntList(p.first, null);
+            IntList Q = L;
+            while (p.rest != null) {
+                p = p.rest;
+                L.rest = new IntList(p.first, null);
+                L = L.rest;
+            }
+            return Q;
+        }
+        else {
+            IntList p = A;
+            IntList L = new IntList(p.first, null);
+            IntList Q = L;
+            while (p.rest != null) {
+                p = p.rest;
+                L.rest = new IntList(p.first, null);
+                L = L.rest;
+
+            }
+            p = B;
+            L.rest = new IntList(p.first, null);
+            L = L.rest;
+            while (p.rest != null) {
+                p = p.rest;
+                L.rest = new IntList(p.first, null);
+                L = L.rest;
+            }
+
+            return Q;
+        }
     }
 
+    public static IntList copyRecursive(IntList A){
+        IntList p=A;
+        IntList L;
+        if(p==null) return null;
+        else {
+            L=new IntList(p.first, copyRecursive(p.rest));
+        }
+        return L;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public static IntList catenateRecursive(IntList A, IntList B){
+        IntList M=copyRecursive(B);
+        IntList p=A;
+        IntList L;
+        if(p==null) {return M;}
+        else { L=new IntList(p.first,catenateRecursive(p.rest, B));}
+        return L;
+    }
+    
 
     /**
      * DO NOT MODIFY ANYTHING BELOW THIS LINE! Many of the concepts below here
@@ -231,4 +300,5 @@ public class IntList {
         return out.toString();
     }
 }
+
 
